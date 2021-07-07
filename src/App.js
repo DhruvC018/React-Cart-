@@ -1,9 +1,10 @@
 import React from 'react';
+import CartItem from './CartItem';
 
-function App() {
+function App() { //here, App is a function based component.
   return (
     <div className="App">
-      <h1> Cart </h1>
+      <CartItem />
     </div>
   );
 }
