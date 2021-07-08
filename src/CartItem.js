@@ -11,9 +11,27 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
         } //we use this data in the jsx component. example in line 21.
     }
 
+    // TO INCREASE THE QUANTITY
     increaseQuantity =  () => {
-        //the arrow function binds the elements naturally. we can even use the bind keyword.
+        // this.state.qty += 1;
+        //the arrow function binds the elements naturally. we can even use the bind keyword. example: line 38
         console.log('this.state', this.state);
+        
+        // setState form 1
+        // this.setState({     //changes made, i.e. increasing the quantity needs to be reandered in the react component. Hence we use the setState function that is imported from react.
+        //     qty: this.state.qty + 1
+        // });
+
+        //setState form 2 --> use when previous state required.
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty + 1 //shallow merging with the state object takes place, i.e. only the qty get's changed and nothing else.
+            }
+        });
+
+        //Above mentioned are the 2 form through which we can change our state and re-renders our component
+        //Which form to use when????
+        //When we require the previus state, we use the function method, i.e. the second method. If we don't need the previous state, we use the first form.
     }
 
     render (){  //for class component to be a react component we give the method render.
