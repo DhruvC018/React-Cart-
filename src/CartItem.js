@@ -9,30 +9,82 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
             qty: 1,
             img: ''
         } //we use this data in the jsx component. example in line 21.
+        this.testing();
+    }
+
+    // using promises and check how setState actually works
+
+    testing(){
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('done')
+            }, 5000);
+        });
+
+        promise.then(() => {
+            this.setState({qty: this.state.qty + 10});
+
+            console.log('state', this.state);
+        });
     }
 
     // TO INCREASE THE QUANTITY
     increaseQuantity =  () => {
         // this.state.qty += 1;
         //the arrow function binds the elements naturally. we can even use the bind keyword. example: line 38
-        console.log('this.state', this.state);
+        //Batching takes place for this form (form 1)
+        // console.log('this.state', this.state); --> makes it asynchronus. making it synchronus explained in line 34-36.
         
         // setState form 1
         // this.setState({     //changes made, i.e. increasing the quantity needs to be reandered in the react component. Hence we use the setState function that is imported from react.
         //     qty: this.state.qty + 1
-        // });
+        // }, () => {
+            // console.log('this.state', this.state)
+        // });  
+        //above is the callback to make it asynchronus like done in line 40-42.
+
+
 
         //setState form 2 --> use when previous state required.
+        //Batching doesn't take place for this form.
         this.setState((prevState) => {
             return{
                 qty: prevState.qty + 1 //shallow merging with the state object takes place, i.e. only the qty get's changed and nothing else.
             }
-        });
+            //Since React is asynchronus in nature, it doesn't get updated correctly. Hence to make it synchronus in nature, there is an option:
+            //setState is asynchronus hence it's hard to know when the call will end and so we can't solely rely on this.state
+            //for this(to make it synchronus), react gives us an option to make it synchronus by
+            //by sending another call-back
+        }, () => {
+            console.log('this.state', this.state);
+        });  //Now, How does it make it Asynchronus?
+        //this call-back is called after the execution of the setState, i.e. after we click and then it get's updated.
+
+
 
         //Above mentioned are the 2 form through which we can change our state and re-renders our component
         //Which form to use when????
         //When we require the previus state, we use the function method, i.e. the second method. If we don't need the previous state, we use the first form.
     }
+
+    decreseQuantity = () => {
+        // doesn't let hte quantity decrease beyond 0
+        const{ qty } = this.state;
+        if(qty == 0){
+            return;
+        }
+        //Here we will use the 2 form because to change the quantity, we need the previous value.
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty - 1
+            }
+        });
+    }
+
+    //Batching takes place for form 1 and not form 2. 
+    //setState function is Asynchronus.
+
+    //Batching doesn't take place for Ajax and Promises.
 
     render (){  //for class component to be a react component we give the method render.
         const { price, title, qty } = this.state; //using object destructuring. getting the object, the one above created. We get the properties from the object
@@ -59,6 +111,7 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
                             alt="decrease" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/png/512/992/992683.png" 
+                            onClick={this.decreseQuantity}
                         />
                         <img 
                             alt="delete" 
