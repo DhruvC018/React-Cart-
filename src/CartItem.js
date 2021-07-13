@@ -39,7 +39,7 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
     ///////////////////////////////
 
     // TO INCREASE THE QUANTITY
-    increaseQuantity =  () => {
+    // increaseQuantity =  () => {
         // this.state.qty += 1;
         //the arrow function binds the elements naturally. we can even use the bind keyword. example: line 38
         //Batching takes place for this form (form 1)
@@ -78,7 +78,7 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
         //Above mentioned are the 2 form through which we can change our state and re-renders our component
         //Which form to use when????
         //When we require the previus state, we use the function method, i.e. the second method. If we don't need the previous state, we use the first form.
-    }
+    
     
     //these won't work for the moment because of the use of props instead of state
     
@@ -105,6 +105,13 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
         console.log('this.props', this.props)
         const { price, title, qty } = this.props.product; //using object destructuring. getting the object, the one above created. We get the properties from the object
                                                 //product is the array that stores all the properties.
+        const {
+            product, 
+            onIncreaseQty, 
+            onDecreaseQty, 
+            onDeleteProduct
+        } = this.props;
+        
         return(
             <div className="cart-item">
                 {/* {this.props.jsx} */}
@@ -124,18 +131,19 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
                             src="https://image.flaticon.com/icons/png/512/992/992651.png" 
                             // onClick={this.increaseQuantity} //Event listener addded here. Here we can use the bind function in order to use it better. A better alternative to bind function is using the arrow function.
                             //onClick = {this.increaseQuantity.bind(this) // here we bind with the object.} this is how binding takes place. to improve this we use the arrow function.
-                            onClick={() => this.props.onIncreaseQty(this.props.product)} //here we are using props and are calling the funciton from the Cart file.
+                            onClick={() => onIncreaseQty(product)} //here we are using props and are calling the funciton from the Cart file.
                         />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/png/512/992/992683.png" 
-                            onClick={() => this.props.onDecreaseQty(this.props.product)}
+                            onClick={() => onDecreaseQty(product)}
                         />
                         <img 
                             alt="delete" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/png/512/1214/1214428.png" 
+                            onClick={() => onDeleteProduct(product.id)}
                         />
                         {/* Buttons */}
                     </div>
