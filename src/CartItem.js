@@ -1,7 +1,10 @@
 import React from 'react';
 
-class CartItem extends React.Component {   //CartItem will inherit some items from the class Component in the react module.Hence this is a class based component.
-    
+// class CartItem extends React.Component {   //CartItem will inherit some items from the class Component in the react module.Hence this is a class based component.
+
+const CartItem = (props) => {
+
+
 ////////////////////
 //We don't need this since props are used. We can directly give values to the <CartItem> in the cart file and use those values instead of the local values created in this object.    
     //we will instead use this in the next class, create a list of products and a list of hte values and render them directly in the objects.
@@ -101,16 +104,16 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
 
     //Batching doesn't take place for Ajax and Promises.
 
-    render (){  //for class component to be a react component we give the method render.
-        console.log('this.props', this.props)
-        const { price, title, qty } = this.props.product; //using object destructuring. getting the object, the one above created. We get the properties from the object
+    // render (){  //for class component to be a react component we give the method render.
+        // console.log('this.props', this.props)
+        const { price, title, qty } = props.product; //using object destructuring. getting the object, the one above created. We get the properties from the object
                                                 //product is the array that stores all the properties.
         const {
             product, 
             onIncreaseQty, 
             onDecreaseQty, 
             onDeleteProduct
-        } = this.props;
+        } = props;
         
         return(
             <div className="cart-item">
@@ -149,8 +152,7 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
                     </div>
                 </div>
             </div>
-        );
-    }
+        ); 
 }
 
 const styles = {
