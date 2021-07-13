@@ -9,24 +9,28 @@ class CartItem extends React.Component {   //CartItem will inherit some items fr
             qty: 1,
             img: ''
         } //we use this data in the jsx component. example in line 21.
-        this.testing();
+        //this.testing(); used promises here.
     }
 
     // using promises and check how setState actually works
+    
+    /////////////Using promises////////////
+    
+    // testing(){
+    //     const promise = new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve('done')
+    //         }, 5000);
+    //     });
 
-    testing(){
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('done')
-            }, 5000);
-        });
+    //     promise.then(() => {
+    //         this.setState({qty: this.state.qty + 10});
 
-        promise.then(() => {
-            this.setState({qty: this.state.qty + 10});
+    //         console.log('state', this.state);
+    //     });
+    // }
 
-            console.log('state', this.state);
-        });
-    }
+    ///////////////////////////////
 
     // TO INCREASE THE QUANTITY
     increaseQuantity =  () => {

@@ -31,3 +31,10 @@ body {
 .action-icons:hover{
   cursor: pointer;
 }
+
+/* cart */
+
+.cart{
+  display: flex;
+  flex-direction: column;
+}
