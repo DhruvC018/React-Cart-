@@ -106,52 +106,52 @@ const CartItem = (props) => {
 
     // render (){  //for class component to be a react component we give the method render.
         // console.log('this.props', this.props)
-        const { price, title, qty } = props.product; //using object destructuring. getting the object, the one above created. We get the properties from the object
+    const { price, title, qty } = props.product; //using object destructuring. getting the object, the one above created. We get the properties from the object
                                                 //product is the array that stores all the properties.
-        const {
-            product, 
-            onIncreaseQty, 
-            onDecreaseQty, 
-            onDeleteProduct
-        } = props;
+    const {
+        product, 
+        onIncreaseQty, 
+        onDecreaseQty, 
+        onDeleteProduct
+    } = props;
         
-        return(
-            <div className="cart-item">
-                {/* {this.props.jsx} */}
-                <div className="left-block">
-                    <img style={styles.image} />
-                </div>
-                <div className="right-block">
+    return(
+        <div className="cart-item">
+            {/* {this.props.jsx} */}
+            <div className="left-block">
+                <img style={styles.image} src={product.img}/>
+            </div>
+            <div className="right-block">
     
-                    <div style={ { fontSize: 25 } }> {title} </div> 
-                    <div style={ {color: '#777'} }> Rs {price} </div>
-                    <div style={ {color: '#777'} }> Qty: {qty} </div>
+                <div style={ { fontSize: 25 } }> {title} </div> 
+                <div style={ {color: '#777'} }> Rs {price} </div>
+                <div style={ {color: '#777'} }> Qty: {qty} </div>
 
-                    <div className="cart-item-actions">
-                        <img 
-                            alt="increase" 
-                            className="action-icons" 
-                            src="https://image.flaticon.com/icons/png/512/992/992651.png" 
-                            // onClick={this.increaseQuantity} //Event listener addded here. Here we can use the bind function in order to use it better. A better alternative to bind function is using the arrow function.
-                            //onClick = {this.increaseQuantity.bind(this) // here we bind with the object.} this is how binding takes place. to improve this we use the arrow function.
-                            onClick={() => onIncreaseQty(product)} //here we are using props and are calling the funciton from the Cart file.
-                        />
-                        <img 
-                            alt="decrease" 
-                            className="action-icons" 
-                            src="https://image.flaticon.com/icons/png/512/992/992683.png" 
-                            onClick={() => onDecreaseQty(product)}
-                        />
-                        <img 
-                            alt="delete" 
-                            className="action-icons" 
-                            src="https://image.flaticon.com/icons/png/512/1214/1214428.png" 
-                            onClick={() => onDeleteProduct(product.id)}
-                        />
-                        {/* Buttons */}
-                    </div>
+                <div className="cart-item-actions">
+                    <img 
+                        alt="increase" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/png/512/992/992651.png" 
+                        // onClick={this.increaseQuantity} //Event listener addded here. Here we can use the bind function in order to use it better. A better alternative to bind function is using the arrow function.
+                        //onClick = {this.increaseQuantity.bind(this) // here we bind with the object.} this is how binding takes place. to improve this we use the arrow function.
+                        onClick={() => onIncreaseQty(product)} //here we are using props and are calling the funciton from the Cart file.
+                    />
+                    <img 
+                        alt="decrease" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/png/512/992/992683.png" 
+                        onClick={() => onDecreaseQty(product)}
+                    />
+                    <img 
+                        alt="delete" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/png/512/1214/1214428.png" 
+                        onClick={() => onDeleteProduct(product.id)}
+                    />
+                    {/* Buttons */}
                 </div>
             </div>
+        </div>
         ); 
 }
 

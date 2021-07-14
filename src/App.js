@@ -13,21 +13,21 @@ class App extends React.Component { //here, App is a function based component.
             price: 99,
             title: 'Watch',
             qty: 10,
-            img: '',
+            img: 'https://www.longines.com/media/catalog/product/cache/8db0cbef53b094d1dd99f8463500f53a/t/h/the-longines-master-collection-l2-673-4-78-3-detailed-view-2000x2000-1.jpg',
             id: 1
           },
           {
             price: 999,
             title: 'Mobile Phone',
             qty: 1,
-            img: '',
+            img: 'https://images-na.ssl-images-amazon.com/images/I/71MHTD3uL4L._SL1500_.jpg',
             id: 2
           },
           {
             price: 999,
             title: 'Laptop',
             qty: 4,
-            img: '',
+            img: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-select-202011?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1613672894000',
             id: 3
           }
         ]
@@ -81,6 +81,16 @@ class App extends React.Component { //here, App is a function based component.
       return count;
     }
 
+    getCartTotal = () => {
+      const{products} = this.state;
+
+      let cartTotal = 0;
+      products.map((product) => {
+        cartTotal = cartTotal + product.qty * product.price;
+      })
+      return cartTotal;
+    }
+
     render() {
       const { products } = this.state;
     return (
@@ -92,6 +102,8 @@ class App extends React.Component { //here, App is a function based component.
           onDecreaseQty={this.handleDecreaseQty}
           onDeleteProduct={this.handleDeleteProduct}
         />
+        
+        <div style={{fontSize: 20, padding: 10}}>TOTAL: {this.getCartTotal()}</div>
       </div>
     );
   }
